@@ -20,7 +20,7 @@ $Results = foreach ($OU in $OUs) {
 
 # Filter computers logged in within last 6 months
 $Filtered = $Results |
-Where-Object { $_.LastLogonDate -ge $Cutoff } |
+Where-Object { -not $_.LastLogonDate -or $_.LastLogonDate -lt $Cutoff } |
 Sort-Object OU, @{Expression="LastLogonDate";Descending=$true}
 
 # Display results
